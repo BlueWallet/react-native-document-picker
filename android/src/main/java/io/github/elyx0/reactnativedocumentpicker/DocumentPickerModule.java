@@ -53,7 +53,7 @@ public class DocumentPickerModule extends ReactContextBaseJavaModule {
 	private static final String OPTION_TYPE = "type";
 	private static final String OPTION_MULIPLE = "multiple";
 	private static final String OPTION_COPYTO = "copyTo";
-
+	private static final String OPTION_CREATE = "isCreate";
 	private static final String FIELD_URI = "uri";
 	private static final String FIELD_FILE_COPY_URI = "fileCopyUri";
 	private static final String FIELD_COPY_ERROR = "copyError";
@@ -112,7 +112,18 @@ public class DocumentPickerModule extends ReactContextBaseJavaModule {
 		}
 
 		try {
-			Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+			boolean isCreate = !args.isNull(OPTION_CREATE) && args.getBoolean(OPTION_CREATE);
+			Intent intent;
+			if(isCreate)
+			{
+					intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+					intent.putExtra(Intent.EXTRA_TITLE, args.getString(FIELD_NAME));
+			
+			}
+			else
+			{
+				intent = new Intent(Intent.ACTION_GET_CONTENT);
+			}
 			intent.addCategory(Intent.CATEGORY_OPENABLE);
 
 			intent.setType("*/*");
