@@ -36,6 +36,10 @@ See [this](./install-old.md)
 
 ## API
 
+#### [Android only] `DocumentPicker.pickDirectory()`
+
+Open a system directory picker. Returns a promise that resolves to (`{ uri: string }`) of the directory selected by user.
+
 #### `DocumentPicker.pick(options)` and `DocumentPicker.pickMultiple(options)`
 
 Use `pick` or `pickMultiple` to open a document picker for the user to select file(s). Both methods return a Promise. `pick` will only allow a single selection and the Promise will resolve to that single result. `pickMultiple` will allow multiple selection and the Promise returned will always resolve to an array of results.
@@ -106,6 +110,14 @@ The file size of the document. _On Android some DocumentProviders may not provid
 ##### [UWP only] `content`:
 
 The base64 encoded content of the picked file if the option `readContent` was set to `true`.
+
+
+### Result
+
+##### `uri`:
+
+The URI of the selected directory. Usually it will be a content URI.
+
 
 ### `DocumentPicker.types.*`
 
